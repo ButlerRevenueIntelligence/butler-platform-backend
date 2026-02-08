@@ -16,6 +16,19 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 app.use(morgan('combined'));
+// =====================
+// Health Check
+// =====================
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'Butler & Co Revenue Intelligence Backend'
+  });
+});
+
+app.get('/', (req, res) => {
+  res.send('Butler & Co Revenue Intelligence API is running');
+});
 
 // JWT Secret (in production, use environment variable)
 const JWT_SECRET = process.env.JWT_SECRET || 'butler-revenue-intelligence-secret-2026';
